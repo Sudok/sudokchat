@@ -1,0 +1,23 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  # For details on connection pooling, see rails configuration guide
+  # http://guides.rubyonrails.org/configuring.html#database-pooling
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  host: postgres
+  user: postgres
+  # Check default password for postgres on Docker
+
+development:
+  <<: *default
+  database: sudokchat_development
+
+test:
+  <<: *default
+  database: sudokchat_test
+
+production:
+  <<: *default
+  database: sudokchat_production
+  username: sudokchat
+  password: <%= ENV['SUDOKCHAT_DATABASE_PASSWORD'] %>
